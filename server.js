@@ -8,7 +8,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/phonebook-app/index.html'));
 });
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+const port = process.env.PORT || 3000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Phonebook app running on port ${port}`);
+  console.log(`Open http://localhost:${port} to view the app`);
 });

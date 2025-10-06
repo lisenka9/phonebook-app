@@ -7,12 +7,13 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "postinstall": "ng build --configuration production --output-path dist/phonebook-app",
+    "dev": "ng serve",
+    "railway-build": "ng build --configuration production",
     "serve:ssr:phonebook-app": "node dist/phonebook-app/server/server.mjs"
   },
   "engines": {
-    "node": "18.x",
-    "npm": "8.x"
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   },
   "prettier": {
     "printWidth": 100,
