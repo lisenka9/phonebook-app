@@ -2,6 +2,9 @@
   command = "npm install && npm run build"
   publish = "dist/phonebook-app/browser"
 
+[plugins]
+  disabled = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
