@@ -9,6 +9,7 @@
   </div>
 
   <div class="row">
+    <!-- Список контактов -->
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
@@ -41,6 +42,7 @@
       </div>
     </div>
 
+    <!-- Форма редактирования -->
     <div class="col-md-6" *ngIf="selectedContact">
       <div class="card">
         <div class="card-header">
@@ -49,7 +51,7 @@
           </h5>
         </div>
         <div class="card-body">
-          <form (ngSubmit)="saveContact(selectedContact!)">
+          <form (ngSubmit)="saveContact(selectedContact)">
             <div class="mb-3">
               <label for="username" class="form-label">Имя</label>
               <input type="text" class="form-control" id="username"
@@ -86,7 +88,7 @@
                       (click)="selectedContact = null">
                 Отмена
               </button>
-              <button *ngIf="selectedContact.id" 
+              <button *ngIf="selectedContact?.id" 
                       type="button" class="btn btn-danger ms-auto"
                       (click)="deleteContact(selectedContact.id!)">
                 Удалить

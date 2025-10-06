@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Добавьте эту строку
+import { FormsModule } from '@angular/forms';   // Добавьте эту строку
 import { Contact } from '../models/contact';
 import { SupabaseService } from '../services/supabase.service';
 
 @Component({
   selector: 'app-contact-list',
+  standalone: true, 
   templateUrl: './contact-list.component.html',
-  styleUrls: ['./contact-list.component.css']
+  styleUrls: ['./contact-list.component.css'],
+  imports: [CommonModule, FormsModule] 
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
@@ -54,7 +58,9 @@ export class ContactListComponent implements OnInit {
     }
   }
 
-  async saveContact(contact: Contact) {
+  async saveContact(contact: Contact | null) {
+    if (!contact) return;
+    
     try {
       if (contact.id) {
         // Обновление существующего контакта
