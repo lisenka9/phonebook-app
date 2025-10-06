@@ -9,7 +9,6 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Phonebook app running on port ${port}`);
-  console.log(`Open http://localhost:${port} to view the app`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
