@@ -70,17 +70,15 @@
             </div>
 
             <div class="mb-3">
-              <label for="email" class="form-label">Email *</label>
+              <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control" id="email"
-                     [(ngModel)]="selectedContact.email"
-                     name="email" 
-                     required
-                     email
-                     #email="ngModel"
-                     [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
-                     [class.is-valid]="email.valid && (email.dirty || email.touched)">
+                    [(ngModel)]="selectedContact.email"
+                    name="email" 
+                    email
+                    #email="ngModel"
+                    [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+                    [class.is-valid]="email.valid && (email.dirty || email.touched)">
               <div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback">
-                <div *ngIf="email.errors?.['required']">Email обязателен для заполнения</div>
                 <div *ngIf="email.errors?.['email']">Введите корректный email</div>
               </div>
             </div>
