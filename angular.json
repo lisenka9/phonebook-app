@@ -1,6 +1,14 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
   "projects": {
     "phonebook-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -16,7 +24,24 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
               "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimization": false,
+              "optimization": false,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -26,10 +51,17 @@
           "configurations": {
             "production": {
               "buildTarget": "phonebook-app:build:production"
+            },
+            "development": {
+              "buildTarget": "phonebook-app:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "63040652-9ab5-4ab8-bfa1-abc1e0f0106d"
   }
 }

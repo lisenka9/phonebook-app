@@ -1,18 +1,20 @@
 {
   "name": "phonebook-app",
+  "version": "1.0.0",
   "scripts": {
     "build": "ng build --configuration production",
-    "dev": "ng serve"
+    "dev": "ng serve",
+    "vercel-build": "ng build --configuration production"
   },
   "dependencies": {
-    "@angular/animations": "^17.0.0",
-    "@angular/common": "^17.0.0",
-    "@angular/compiler": "^17.0.0",
-    "@angular/core": "^17.0.0",
-    "@angular/forms": "^17.0.0",
-    "@angular/platform-browser": "^17.0.0",
-    "@angular/platform-browser-dynamic": "^17.0.0",
-    "@angular/router": "^17.0.0",
+    "@angular/animations": "~17.3.0",
+    "@angular/common": "~17.3.0",
+    "@angular/compiler": "~17.3.0",
+    "@angular/core": "~17.3.0",
+    "@angular/forms": "~17.3.0",
+    "@angular/platform-browser": "~17.3.0",
+    "@angular/platform-browser-dynamic": "~17.3.0",
+    "@angular/router": "~17.3.0",
     "@supabase/supabase-js": "^2.38.0",
     "bootstrap": "^5.3.0",
     "rxjs": "~7.8.0",
@@ -20,9 +22,21 @@
     "zone.js": "~0.14.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.0.0",
-    "@angular/cli": "^17.0.0",
-    "@angular/compiler-cli": "^17.0.0",
+    "@angular-devkit/build-angular": "~17.3.0",
+    "@angular/cli": "~17.3.0",
+    "@angular/compiler-cli": "~17.3.0",
     "typescript": "~5.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
