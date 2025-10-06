@@ -1,0 +1,100 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Телефонный справочник</h2>
+      <button class="btn btn-primary mb-3" (click)="createNewContact()">
+        Добавить контакт
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Контакты</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="loading" class="text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Загрузка...</span>
+            </div>
+          </div>
+          
+          <div *ngIf="!loading && contacts.length === 0" class="text-center">
+            <p>Контактов не найдено</p>
+          </div>
+
+          <div class="list-group">
+            <a *ngFor="let contact of contacts"
+               class="list-group-item list-group-item-action"
+               [class.active]="selectedContact?.id === contact.id"
+               (click)="selectContact(contact)">
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">{{ contact.username }}</h6>
+              </div>
+              <p class="mb-1">{{ contact.email }}</p>
+              <small *ngIf="contact.mobile">Мобильный: {{ contact.mobile }}</small>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6" *ngIf="selectedContact">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            {{ selectedContact.id ? 'Редактирование' : 'Новый контакт' }}
+          </h5>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="saveContact(selectedContact!)">
+            <div class="mb-3">
+              <label for="username" class="form-label">Имя</label>
+              <input type="text" class="form-control" id="username"
+                     [(ngModel)]="selectedContact.username"
+                     name="username" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email"
+                     [(ngModel)]="selectedContact.email"
+                     name="email" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="mobile" class="form-label">Мобильный телефон</label>
+              <input type="tel" class="form-control" id="mobile"
+                     [(ngModel)]="selectedContact.mobile"
+                     name="mobile">
+            </div>
+
+            <div class="mb-3">
+              <label for="home" class="form-label">Домашний телефон</label>
+              <input type="tel" class="form-control" id="home"
+                     [(ngModel)]="selectedContact.home"
+                     name="home">
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success">
+                {{ selectedContact.id ? 'Обновить' : 'Создать' }}
+              </button>
+              <button type="button" class="btn btn-secondary" 
+                      (click)="selectedContact = null">
+                Отмена
+              </button>
+              <button *ngIf="selectedContact.id" 
+                      type="button" class="btn btn-danger ms-auto"
+                      (click)="deleteContact(selectedContact.id!)">
+                Удалить
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

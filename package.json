@@ -1,13 +1,18 @@
 {
   "name": "phonebook-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "postinstall": "ng build --configuration production --output-path dist/phonebook-app",
     "serve:ssr:phonebook-app": "node dist/phonebook-app/server/server.mjs"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
   },
   "prettier": {
     "printWidth": 100,
@@ -31,7 +36,10 @@
     "@angular/platform-server": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/ssr": "^20.3.4",
+    "@supabase/supabase-js": "^2.58.0",
+    "bootstrap": "^5.3.8",
     "express": "^5.1.0",
+    "path": "^0.12.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

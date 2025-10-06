@@ -1,0 +1,7 @@
+{
+  "root": "dist/phonebook-app/",
+  "clean_urls": false,
+  "routes": {
+    "/**": "index.html"
+  }
+}
