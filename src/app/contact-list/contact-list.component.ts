@@ -45,6 +45,11 @@ export class ContactListComponent implements OnInit {
       mobile: '',
       home: ''
     };
+
+    setTimeout(() => {
+    const firstInput = document.getElementById('username') as HTMLInputElement;
+    if (firstInput) firstInput.focus();
+  }, 100);
   }
 
   async deleteContact(id: number) {
@@ -61,7 +66,10 @@ export class ContactListComponent implements OnInit {
 
   async saveContact(contact: Contact | null) {
     if (!contact) return;
-    
+    if (!contact.username || !contact.email || !contact.mobile) {
+    alert('Пожалуйста, заполните все обязательные поля');
+    return;
+  }
     try {
       if (contact.id) {
         // Обновление существующего контакта

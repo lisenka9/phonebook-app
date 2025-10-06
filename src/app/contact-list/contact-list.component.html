@@ -35,8 +35,8 @@
                 <h6 class="mb-1">{{ contact.username }}</h6>
               </div>
               <p class="mb-1">{{ contact.email }}</p>
-              <small *ngIf="contact.mobile">Мобильный: {{ contact.mobile }}</small>
-              <small *ngIf="contact.home" class="d-block">Домашний: {{ contact.home }}</small>
+              <small *ngIf="contact.mobile" class="d-block">📱 Мобильный: {{ contact.mobile }}</small>
+              <small *ngIf="contact.home" class="d-block">🏠 Домашний: {{ contact.home }}</small>
             </a>
           </div>
         </div>
@@ -52,37 +52,72 @@
           </h5>
         </div>
         <div class="card-body">
-          <form (ngSubmit)="saveContact(selectedContact)">
+          <form (ngSubmit)="saveContact(selectedContact)" #contactForm="ngForm">
             <div class="mb-3">
-              <label for="username" class="form-label">Имя</label>
+              <label for="username" class="form-label">Имя *</label>
               <input type="text" class="form-control" id="username"
                      [(ngModel)]="selectedContact.username"
-                     name="username" required>
+                     name="username" 
+                     required
+                     minlength="2"
+                     #username="ngModel"
+                     [class.is-invalid]="username.invalid && (username.dirty || username.touched)"
+                     [class.is-valid]="username.valid && (username.dirty || username.touched)">
+              <div *ngIf="username.invalid && (username.dirty || username.touched)" class="invalid-feedback">
+                <div *ngIf="username.errors?.['required']">Имя обязательно для заполнения</div>
+                <div *ngIf="username.errors?.['minlength']">Имя должно содержать минимум 2 символа</div>
+              </div>
             </div>
 
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
+              <label for="email" class="form-label">Email *</label>
               <input type="email" class="form-control" id="email"
                      [(ngModel)]="selectedContact.email"
-                     name="email" required>
+                     name="email" 
+                     required
+                     email
+                     #email="ngModel"
+                     [class.is-invalid]="email.invalid && (email.dirty || email.touched)"
+                     [class.is-valid]="email.valid && (email.dirty || email.touched)">
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="invalid-feedback">
+                <div *ngIf="email.errors?.['required']">Email обязателен для заполнения</div>
+                <div *ngIf="email.errors?.['email']">Введите корректный email</div>
+              </div>
             </div>
 
             <div class="mb-3">
-              <label for="mobile" class="form-label">Мобильный телефон</label>
+              <label for="mobile" class="form-label">Мобильный телефон *</label>
               <input type="tel" class="form-control" id="mobile"
                      [(ngModel)]="selectedContact.mobile"
-                     name="mobile">
+                     name="mobile"
+                     required
+                     pattern="^[\+]?[0-9\s\-\(\)]+$"
+                     #mobile="ngModel"
+                     [class.is-invalid]="mobile.invalid && (mobile.dirty || mobile.touched)"
+                     [class.is-valid]="mobile.valid && (mobile.dirty || mobile.touched)">
+              <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="invalid-feedback">
+                <div *ngIf="mobile.errors?.['required']">Мобильный телефон обязателен</div>
+                <div *ngIf="mobile.errors?.['pattern']">Введите корректный номер телефона</div>
+              </div>
             </div>
 
             <div class="mb-3">
               <label for="home" class="form-label">Домашний телефон</label>
               <input type="tel" class="form-control" id="home"
                      [(ngModel)]="selectedContact.home"
-                     name="home">
+                     name="home"
+                     pattern="^[\+]?[0-9\s\-\(\)]+$"
+                     #home="ngModel"
+                     [class.is-invalid]="home.invalid && (home.dirty || home.touched)"
+                     [class.is-valid]="home.valid && (home.dirty || home.touched)">
+              <div *ngIf="home.invalid && (home.dirty || home.touched)" class="invalid-feedback">
+                <div *ngIf="home.errors?.['pattern']">Введите корректный номер телефона</div>
+              </div>
             </div>
 
             <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-success">
+              <button type="submit" class="btn btn-success" 
+                      [disabled]="contactForm.invalid">
                 {{ selectedContact.id ? 'Обновить' : 'Создать' }}
               </button>
               <button type="button" class="btn btn-secondary" 
