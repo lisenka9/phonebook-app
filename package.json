@@ -1,8 +1,8 @@
 {
   "name": "phonebook-app",
   "scripts": {
-    "build": "ng build",
-    "build:prod": "ng build --configuration production"
+    "build": "ng build --configuration production",
+    "dev": "ng serve"
   },
   "dependencies": {
     "@angular/animations": "^17.0.0",
