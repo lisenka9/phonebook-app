@@ -1,3 +1,4 @@
+// src/app/services/supabase.service.ts
 import { Injectable } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
@@ -23,7 +24,10 @@ export class SupabaseService {
       .select('*')
       .order('created_at', { ascending: false });
     
-    if (error) throw error;
+    if (error) {
+      console.error('Error fetching contacts:', error);
+      throw error;
+    }
     return data || [];
   }
 
@@ -31,10 +35,19 @@ export class SupabaseService {
   async createContact(contact: Contact): Promise<Contact> {
     const { data, error } = await this.supabase
       .from('contacts')
-      .insert([contact])
+      .insert([{
+        username: contact.username,
+        email: contact.email,
+        mobile: contact.mobile,
+        home: contact.home
+      }])
+      .select()
       .single();
     
-    if (error) throw error;
+    if (error) {
+      console.error('Error creating contact:', error);
+      throw error;
+    }
     return data;
   }
 
@@ -42,11 +55,20 @@ export class SupabaseService {
   async updateContact(contact: Contact): Promise<Contact> {
     const { data, error } = await this.supabase
       .from('contacts')
-      .update(contact)
+      .update({
+        username: contact.username,
+        email: contact.email,
+        mobile: contact.mobile,
+        home: contact.home
+      })
       .eq('id', contact.id)
+      .select()
       .single();
     
-    if (error) throw error;
+    if (error) {
+      console.error('Error updating contact:', error);
+      throw error;
+    }
     return data;
   }
 
@@ -57,6 +79,9 @@ export class SupabaseService {
       .delete()
       .eq('id', id);
     
-    if (error) throw error;
+    if (error) {
+      console.error('Error deleting contact:', error);
+      throw error;
+    }
   }
 }

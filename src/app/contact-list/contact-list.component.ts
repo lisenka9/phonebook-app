@@ -28,6 +28,7 @@ export class ContactListComponent implements OnInit {
       this.contacts = await this.supabaseService.getContacts();
     } catch (error) {
       console.error('Error loading contacts:', error);
+      alert('Ошибка загрузки контактов');
     } finally {
       this.loading = false;
     }
@@ -65,14 +66,17 @@ export class ContactListComponent implements OnInit {
       if (contact.id) {
         // Обновление существующего контакта
         await this.supabaseService.updateContact(contact);
+        alert('Контакт обновлен!');
       } else {
         // Создание нового контакта
         await this.supabaseService.createContact(contact);
+        alert('Контакт создан!');
       }
       await this.loadContacts();
       this.selectedContact = null;
     } catch (error) {
       console.error('Error saving contact:', error);
+      alert('Ошибка сохранения контакта');
     }
   }
 }
